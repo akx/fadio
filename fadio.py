@@ -36,6 +36,7 @@ def main():
         "-l", "--length", type=int, required=True, help="Length of output in frames"
     )
     ap.add_argument("-s", "--sort-input", action="store_true", help="Sort input")
+    ap.add_argument("--reverse-input", action="store_true", help="Reverse input")
     ap.add_argument(
         "--influence-width",
         type=float,
@@ -46,6 +47,8 @@ def main():
     filenames = list(args.input)
     if args.sort_input:
         filenames.sort()
+    if args.reverse_input:
+        filenames.reverse()
     in_frames = [Image.open(f).convert("RGB") for f in filenames]
     print(f"Read {len(in_frames)} frames")
     output_size = min(f.size for f in in_frames)
